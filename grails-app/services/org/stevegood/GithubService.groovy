@@ -13,6 +13,6 @@ class GithubService {
     }
 
     def getReposForUser(String username) {
-        new JsonSlurper().parseText(new URL("$HOST/users/${username}/repos?type=all&sort=name").text)
+        new JsonSlurper().parseText(new URL("$HOST/users/${username}/repos?type=public&sort=name").text)
     }
 }

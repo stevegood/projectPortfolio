@@ -32,4 +32,34 @@ class GhUser {
     	id generator: 'assigned', name: 'username', type: 'string'
         bio type: 'text'
     }
+
+    String getBlog() {
+        return blog
+    }
+
+    void setBlog(String blog) {
+        this.blog = prepURL blog
+    }
+
+    String getAvatar_url() {
+        return avatar_url
+    }
+
+    void setAvatar_url(String avatar_url) {
+        this.avatar_url = prepURL avatar_url
+    }
+
+    String getHtml_url() {
+        return html_url
+    }
+
+    void setHtml_url(String html_url) {
+        this.html_url = prepURL html_url
+    }
+
+    protected String prepURL(String url) {
+        if (!url.toLowerCase().startsWith('http'))
+            url = "http://$url"
+        url
+    }
 }

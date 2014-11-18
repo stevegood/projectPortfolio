@@ -58,7 +58,7 @@ class GhUser {
     }
 
     protected String prepURL(String url) {
-        if (!url.toLowerCase().startsWith('http'))
+        if (url && !url?.toLowerCase()?.startsWith('http'))
             url = "http://$url"
         url
     }

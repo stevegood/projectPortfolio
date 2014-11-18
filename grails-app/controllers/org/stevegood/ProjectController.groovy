@@ -61,4 +61,13 @@ class ProjectController {
 
     	[user: user]
     }
+
+	def refreshUser(GhUser user) {
+		user = ghUserService.importFromGithub(user?.username ?: params.id)
+
+		flash.message = "Refreshed data for ${user.username}"
+		flash.type = 'success'
+
+		redirect action: 'show', id: user.username
+	}
 }

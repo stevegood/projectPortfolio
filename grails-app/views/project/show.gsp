@@ -16,7 +16,12 @@
 <div class="container">
     <div class="page-header">
         <h1>
-            ${user.name ?: user.username}<br/>
+            ${user.name ?: user.username}
+            <div class="btn-group pull-right">
+                <g:link class="btn btn-success" action="refreshUser" id="${user.username}">
+                    <i class="glyphicon glyphicon-refresh"></i>
+                </g:link>
+            </div>
         </h1>
     </div>
     

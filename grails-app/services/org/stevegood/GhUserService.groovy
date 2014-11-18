@@ -38,15 +38,22 @@ class GhUserService {
             }
         }
 
+        def incomingIds = []
         repos?.each { _repo ->
+            incomingIds << (_repo.id as long)
             if (!_repo.fork && !_repo.private) {
                 def repo = GhRepo.findOrCreateByGithubid(_repo.id as long)
                 _repo.remove('owner')
                 _repo.remove('id')
                 repo.properties = _repo
-                repo.owner = user
                 user.addToRepos(repo)
             }
+        }
+
+        def savedIds = user.repos*.githubid
+        if (savedIds?.size()) {
+            def reposToRemove = savedIds - incomingIds
+            if (reposToRemove.size()) GhRepo.findAllByGithubidInList(reposToRemove)*.delete()
         }
     }
 
